@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For You 💗</title>
+
+  <style>
+    :root{
+      --pink-1:#ffd1e8;
+      --pink-2:#ff6fb1;
+      --pink-3:#ff2d88;
+      --white:#ffffff;
+      --ink:#2a2430;
+      --card:#ffffffcc;
+      --shadow: 0 18px 50px rgba(0,0,0,.12);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 20% 0%, var(--pink-1), transparent 60%),
+        radial-gradient(1200px 700px at 80% 10%, #ffe6f2, transparent 60%),
+        linear-gradient(180deg, #fff, #fff7fb 40%, #fff);
+      overflow-x:hidden;
+    }
+
+    header{
+      padding: 28px 16px 10px;
+      text-align:center;
+    }
+
+    .badge{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 14px;
+      border-radius:999px;
+      background: #fff;
+      border:1px solid #ffe0ef;
+      box-shadow: 0 10px 20px rgba(255,45,136,.08);
+      font-weight:700;
+    }
+
+    h1{
+      margin:14px 0 6px;
+      font-size: clamp(30px, 4.5vw, 54px);
+      letter-spacing:-0.02em;
+    }
+    .sub{
+      margin:0 auto;
+      max-width: 850px;
+      font-size: clamp(16px, 2.2vw, 20px);
+      opacity:.9;
+      line-height:1.5;
+    }
+
+    .wrap{
+      width:min(1100px, 92vw);
+      margin: 18px auto 64px;
+      display:grid;
+      gap:16px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid #ffe0ef;
+      border-radius:22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+    }
+
+    .card .inner{ padding:18px; }
+
+    .hero{
+      position:relative;
+      display:grid;
+      gap:14px;
+      padding: 18px;
+      background:
+        radial-gradient(circle at 20% 0%, #fff, transparent 55%),
+        radial-gradient(circle at 80% 0%, #fff, transparent 55%),
+        linear-gradient(135deg, #fff, #fff0f7);
+    }
+
+    .big-love{
+      font-size: clamp(22px, 2.8vw, 28px);
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .btns{ display:flex; flex-wrap:wrap; gap:10px; }
+    button{
+      border:0;
+      cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 15px;
+      transition: transform .08s ease, box-shadow .2s ease;
+    }
+    button:active{ transform: scale(.98); }
+
+    .btn-primary{
+      background: linear-gradient(135deg, var(--pink-2), var(--pink-3));
+      color:#fff;
+      box-shadow: 0 12px 22px rgba(255,45,136,.25);
+    }
+    .btn-ghost{
+      background:#fff;
+      color:var(--pink-3);
+      border:2px solid #ffc1dd;
+      box-shadow: 0 12px 22px rgba(255,45,136,.08);
+    }
+
+    .grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns: 1.15fr .85fr;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:10px;
+      padding: 14px;
+    }
+    @media (max-width: 900px){
+      .gallery{ grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 520px){
+      .gallery{ grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .ph{
+      width:100%;
+      aspect-ratio: 1 / 1;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid #ffe0ef;
+      background:#fff;
+      cursor:pointer;
+      position:relative;
+    }
+    .ph img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition: transform .25s ease;
+    }
+    .ph:hover img{ transform: scale(1.05); }
+    .ph::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent, rgba(255,45,136,.08));
+      opacity:0;
+      transition: opacity .2s ease;
+    }
+    .ph:hover::after{ opacity:1; }
+
+    /* Reasons */
+    .reasons-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      padding: 16px 18px 0;
+    }
+    .reasons-head h2{
+      margin:0;
+      font-size: clamp(20px, 2.6vw, 26px);
+      letter-spacing:-0.02em;
+    }
+    .pill{
+      font-weight:800;
+      color: var(--pink-3);
+      background:#fff;
+      border:1px solid #ffd0e6;
+      padding:8px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+
+    .reasons{
+      padding: 12px 14px 16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 720px){
+      .reasons{ grid-template-columns: 1fr; }
+    }
+
+    .reason{
+      background:#fff;
+      border:1px solid #ffe0ef;
+      border-radius:16px;
+      padding: 12px 12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .num{
+      min-width:34px;
+      height:34px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color:#fff;
+      background: linear-gradient(135deg, var(--pink-2), var(--pink-3));
+    }
+    .reason p{ margin:0; line-height:1.4; }
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background: rgba(15, 10, 20, .72);
+      display:none;
+      place-items:center;
+      padding: 20px;
+      z-index: 50;
+    }
+    .lightbox.open{ display:grid; }
+    .lightbox .box{
+      width:min(900px, 95vw);
+      background:#fff;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.35);
+      border: 1px solid #ffffff40;
+    }
+    .lightbox img{
+      width:100%;
+      height:auto;
+      display:block;
+      max-height: 80vh;
+      object-fit:contain;
+      background:#000;
+    }
+    .lightbox .bar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 10px 12px;
+    }
+    .x{
+      border:0;
+      border-radius:12px;
+      padding: 10px 12px;
+      cursor:pointer;
+      font-weight:900;
+      background: #ffe6f2;
+      color: var(--pink-3);
+    }
+
+    /* floating hearts */
+    .heart{
+      position:fixed;
+      bottom:-20px;
+      z-index: 1;
+      user-select:none;
+      pointer-events:none;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,.18));
+      opacity:.9;
+    }
+    @keyframes floatUp{
+      to{
+        transform: translateY(-110vh) translateX(var(--drift));
+        opacity:0;
+      }
+    }
+
+    footer{
+      text-align:center;
+      opacity:.8;
+      padding: 0 16px 30px;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="badge">💗 Pink & White Forever</div>
+  <h1>Hey <span id="herName">my love</span> 💞</h1>
+  <p class="sub">
+    I made this little site because sometimes words feel small…
+    but I still want you to know this: <strong>I love you—deeply, always.</strong>
+  </p>
+</header>
+
+<main class="wrap">
+  <section class="card hero">
+    <p class="big-love" id="memoryLine">
+      My favorite memory is us dancing to <strong>“Kabira”</strong> on my birthday—like the whole world disappeared and it was just us.
+    </p>
+
+    <div class="btns">
+      <button class="btn-primary" id="surpriseBtn">Tap for a surprise 💌</button>
+      <button class="btn-ghost" id="moreHeartsBtn">More hearts ✨</button>
+      <button class="btn-ghost" id="kabiraBtn">Open “Kabira” 🎵</button>
+    </div>
+
+    <div id="secretNote" class="card" style="display:none; margin-top:10px;">
+      <div class="inner">
+        <p style="margin:0; font-weight:900; font-size:18px;">
+          If I had to choose one place to be…
+        </p>
+        <p style="margin:8px 0 0; line-height:1.5;">
+          it would be right next to you—on ordinary days, on hard days, on my best days.
+          Thank you for being my calm, my laugh, and my home.
+        </p>
+        <p style="margin:10px 0 0; font-weight:900;">
+          Love, <span id="yourName">[your name]</span> 💗
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <section class="card">
+      <div class="inner" style="padding-bottom:6px;">
+        <h2 style="margin:0; font-size:22px;">Our Photos 📸</h2>
+        <p style="margin:8px 0 0; opacity:.9;">Click any photo to view it bigger.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </section>
+
+    <section class="card">
+      <div class="reasons-head">
+        <h2>52 Reasons I Love You 💗</h2>
+        <div class="pill" id="countPill">52 reasons</div>
+      </div>
+      <div class="reasons" id="reasons"></div>
+    </section>
+  </section>
+</main>
+
+<footer>
+  Made in pink, made with love.
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="box">
+    <img id="lightboxImg" alt="Photo" />
+    <div class="bar">
+      <div id="lightboxLabel" style="font-weight:800;"></div>
+      <button class="x" id="closeLightbox">Close ✕</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ✅ EDIT THESE
+  const HER_NAME = "Anya maryala";
+  const YOUR_NAME = "Vihaan";
+
+  // Put your photos in /photos and name them exactly like this:
+  const PHOTO_FILES = [
+    "photos/1.jpg","photos/2.jpg","photos/3.jpg","photos/4.jpg","photos/5.jpg",
+    "photos/6.jpg","photos/7.jpg","photos/8.jpg","photos/9.jpg","photos/10.jpg"
+  ];
+
+  const REASONS = [
+    "I love the way you look at me—it feels like you truly see me.",
+    "Your heart is naturally kind, even when nobody’s watching.",
+    "Your eyes are honest, deep, and full of warmth.",
+    "I love that we can talk for hours and it never feels boring.",
+    "You take care of me in ways that matter.",
+    "Your sweetness and gentleness make everything feel lighter.",
+    "You respect me—and that means the world to me.",
+    "Your smile can fix my mood instantly.",
+    "Your hugs make me feel safe, like nothing can touch me.",
+    "I love your scent—it feels like comfort.",
+    "I love your hands… they feel familiar and calming.",
+    "Your sense of humor is addictive—I crave your laughs.",
+    "You make me feel chosen and wanted.",
+    "I love how you face problems and find a way through.",
+    "You’re genuinely smart, and it shows in everything you do.",
+    "You’re outgoing and you bring life into every room.",
+    "I love how you love yourself and keep growing.",
+    "Your strength inspires me more than you know.",
+    "I love your ambition and the goals you’re chasing.",
+    "Your honesty makes me trust you completely.",
+    "Your sincerity is rare—and I feel it in your words.",
+    "Your effort means everything to me—you truly try.",
+    "I love your words of love… they stay with me.",
+    "You’re selfless in the way you show up for people.",
+    "You have this love for life that pulls me in.",
+    "I love when you say romantic lines like you mean every syllable.",
+    "I love the way you hug me—like you don’t want to let go.",
+    "Your little touches make me feel so loved.",
+    "The way you laugh is one of my favorite sounds.",
+    "Even your weird jokes make me laugh—especially the weird ones.",
+    "I love when you cook—your food tastes like care.",
+    "You actually listen, and you make me feel heard.",
+    "Your dimples are unfairly adorable.",
+    "Your perfume choices are always perfect—and so you.",
+    "Your winks are too cute for this world.",
+    "Your corny jokes make me smile every time.",
+    "I love when you sing to me, even if it’s random.",
+    "You’re thoughtful—you notice the little things.",
+    "Your goofy-cute way of singing melts me.",
+    "You know how to make me feel better when I’m not okay.",
+    "When you say you want my attention, it makes me feel needed.",
+    "You complete my life in a way I can’t explain—only feel.",
+    "I love that you plan for “us,” not just yourself.",
+    "Thank you for standing by me when life feels heavy.",
+    "I love the way you fix my hair like it’s the most natural thing.",
+    "You see my imperfections… and you still choose me.",
+    "I love the way you kiss me—soft, real, and yours.",
+    "I love the way you cuddle me and make everything quiet.",
+    "You help me correct my bad habits without making me feel small.",
+    "You teach me independence while still loving me deeply.",
+    "I love that you trust me with your past, fears, and dreams.",
+    "You’re always willing to learn—and that’s beautiful."
+  ];
+
+  // Apply names (FIXED: id is herName with capital N)
+  document.getElementById("herName").textContent = HER_NAME;
+  document.getElementById("yourName").textContent = YOUR_NAME;
+
+  // Reasons render
+  document.getElementById("countPill").textContent = REASONS.length + " reasons";
+  const reasonsEl = document.getElementById("reasons");
+  REASONS.forEach((text, i) => {
+    const item = document.createElement("div");
+    item.className = "reason";
+    item.innerHTML = `<div class="num">${i+1}</div><p>${text}</p>`;
+    reasonsEl.appendChild(item);
+  });
+
+  // Gallery render + lightbox
+  const galleryEl = document.getElementById("gallery");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const lightboxLabel = document.getElementById("lightboxLabel");
+
+  PHOTO_FILES.forEach((src, idx) => {
+    const box = document.createElement("div");
+    box.className = "ph";
+    box.innerHTML = `<img src="${src}" alt="Photo ${idx+1}" loading="lazy">`;
+    box.addEventListener("click", () => openLightbox(src, idx+1));
+    galleryEl.appendChild(box);
+  });
+
+  function openLightbox(src, n){
+    lightboxImg.src = src;
+    lightboxLabel.textContent = `Photo ${n}`;
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden", "false");
+  }
+
+  function closeLightbox(){
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+    lightboxImg.src = "";
+  }
+
+  document.getElementById("closeLightbox").addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => { if(e.target === lightbox) closeLightbox(); });
+
+  // Surprise note
+  const note = document.getElementById("secretNote");
+  document.getElementById("surpriseBtn").addEventListener("click", () => {
+    note.style.display = (note.style.display === "block") ? "none" : "block";
+    sprinkleHearts(18);
+  });
+
+  // Hearts
+  document.getElementById("moreHeartsBtn").addEventListener("click", () => sprinkleHearts(35));
+
+  function sprinkleHearts(n){
+    const hearts = ["💗","💖","💕","💞","💘","✨"];
+    for(let i=0;i<n;i++){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      h.style.left = (Math.random()*100) + "vw";
+      h.style.fontSize = (14 + Math.random()*26) + "px";
+      h.style.animationDuration = (3 + Math.random()*3) + "s";
+      h.style.setProperty("--drift", (Math.random()*140 - 70) + "px");
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 6500);
+    }
+  }
+  setInterval(()=>sprinkleHearts(2), 900);
+
+  // Kabira button (opens search)
+  document.getElementById("kabiraBtn").addEventListener("click", () => {
+    const q = encodeURIComponent("Kabira Arijit Singh");
+    window.open("https://www.youtube.com/results?search_query=" + q, "_blank");
+  });
+</script>
+</body>
+</html>
